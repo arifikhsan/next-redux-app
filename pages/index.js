@@ -8,7 +8,6 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const profile = useSelector(getProfile);
-  console.log(profile)
   return (
     <div className={styles.container}>
       <Head>
