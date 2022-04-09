@@ -32,7 +32,8 @@ export default function Home() {
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
-    store.dispatch(setProfile('John Doe'));
+    store.dispatch(setProfile('John Doe from server'));
+    console.log(store.getState())
     return { props: {} };
   }
 );

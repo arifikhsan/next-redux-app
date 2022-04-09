@@ -13,11 +13,17 @@ export const profileSlice = createSlice({
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
+      if (state.name == '' && action.payload.profile.name != '') {
+        state.name = action.payload.profile.name;
+        console.log(state.name);
+      }
+      // console.log(action.payload.profile.name)
+
       // keep state from client side
       if (state.name != action.payload.profile.name) {
         return state;
       }
-      
+
       state.name = action.payload.profile.name;
     },
   },
