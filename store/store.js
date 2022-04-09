@@ -12,10 +12,12 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
 const persistConfig = {
   key: 'root',
   storage,
+  stateReconciler: hardSet
 };
 const rootReducer = combineReducers({
   profile: profileSlice,

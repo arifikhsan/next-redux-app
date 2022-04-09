@@ -9,19 +9,21 @@ export const profileSlice = createSlice({
   reducers: {
     setProfile: (state, action) => {
       state.name = action.payload;
-    }
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      if (!action.payload.profile.name) {
+      // keep state from client side
+      if (state.name != action.payload.profile.name) {
         return state;
       }
+      
       state.name = action.payload.profile.name;
-    }
-  }
-})
+    },
+  },
+});
 
-export const { setProfile } = profileSlice.actions
-export const getProfile = state => state.profile
+export const { setProfile } = profileSlice.actions;
+export const getProfile = (state) => state.profile;
 
-export default profileSlice.reducer
+export default profileSlice.reducer;
