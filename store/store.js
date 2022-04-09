@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
+import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import profileSlice from './profile-slice';
 import storage from 'redux-persist/lib/storage';
 import {
@@ -19,10 +19,21 @@ const persistConfig = {
   storage,
   stateReconciler: hardSet
 };
-const rootReducer = combineReducers({
+
+const appReducer = combineReducers({
   profile: profileSlice,
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === HYDRATE) {
+    console.log('HYDRATE');
+  }
+  
+  return appReducer(state, action);
+}
+
 const presistedReducer = persistReducer(persistConfig, rootReducer);
+
 const makeStore = ({ isServer }) => {
   if (isServer) {
     return configureStore({ reducer: rootReducer });
